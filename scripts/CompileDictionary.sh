@@ -28,7 +28,7 @@ else
     echo "$0 encountered errors"
     echo "dictionary compilation not completed"
 fi
-
+exit
 rm $DIR/$$_SPHINX_40
 
 echo "Done"
