@@ -65,6 +65,7 @@ use Getopt::Long;
 
 my ($word, $pron, $tok);
 my (%dict, %phone, %class);
+my %dicdup = ();
 my $haslowercase = 0;
 my $problems=0;
 
@@ -115,6 +116,7 @@ while (<DICT>) {
     }
 
     # check variant suffix
+    my $tok = "";
     # note that other than it being a digit, it only has to be unique
     if ( $word =~ /^[\(\)]/ ) {  # ignore 1st char if it's a paren
 	$tok = substr $word, 1;  # this isn't right...
@@ -123,6 +125,20 @@ while (<DICT>) {
 	if ( not ($tok =~ /^.+?\(\d\)$/) ) {
 	    print "ERROR: malformed variant tag in '$word'\n"; $problems++;
 	}
+    }
+
+    # check for duplicate variants
+    my ($root,$variant);
+    if ($tok =~ /\)$/) { # variant
+      ($root,$variant) = ($tok =~ m/(.+?)\((.+?)\)/);
+    } else {
+      $root = $word;
+      $variant = 0;
+    }
+    if ( defined $dicdup{$root}{$pron} ) {
+	print "ERROR: duplicate variants in $root($variant) $pron \n"; $problems++;
+    } else {
+	$dicdup{$root}{$pron} = 0;
     }
 
     # check for legal phonetic symbols
