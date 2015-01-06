@@ -1,10 +1,10 @@
 ;;; # CMUdict  --  Major Version: 0.07
 ;;; 
-;;; # $URL: 
-;;; # $Id: cmudict.0.7 12245 2014-02-17 18:05:41Z air $
-;;; # $Rev: 12245 $  -- this is the *repository's* count; expect gaps
-;;; # $Date: 2014-02-17 13:05:41 -0500 (Mon, 17 Feb 2014) $
-;;; # $Author: air $
+;;; # $HeadURL: $
+;;; # $Id:: cmudict.0.7 12245 2014-02-17 18:05:41Z air          $:
+;;; # $Rev:: 12245                                              $:  -- global; expect gaps
+;;; # $Date:: 2014-02-17 13:05:41 -0500 (Mon, 17 Feb 2014)      $:
+;;; # $Author:: air                                             $:
 ;;;
 ;;; #
 ;;; # ========================================================================
