@@ -10,6 +10,7 @@ $|=0;
 
 my ($word, $pron, $tok);
 my (%dict, %phone, %class);
+my %compare;
 
 my ($phonefile,$symbfile,$dictfile);
 GetOptions("phone=s" => \$phonefile, "dict=s"  => \$dictfile);
@@ -41,13 +42,22 @@ while (<DICT>) {
     if ( $line  =~ /^\s*$/ ) { next; }  # empty lines allowed
 
     # get the head term and the pronunciation, store
-    # need to have the phones in an array, maybe letters
+    # need to have the phones in an array, maybe letters too
     ($word,$pron) = split (/\s+/,$line,2);
 
     my @letter = split '', $word;
     $dict{$word}{'LETTER'} = @letter;
     my @phone = split /\s/, $pron;
     $dict{$word}{'PHONE'}  = @phone;
+
+    # save the pron for each variant for later comparisons
+    my ($root,$var);
+    if ( $word =~ /^(\w+)\((\d)\)$/ ) {
+	$root = $1; $var = $2;
+    } else {
+	$root = $word; $var = 0;
+    }
+    @{$compare{$root}[$var]} = @phone;
 
     my @stress = ();
     my @pattrn = ();
@@ -109,5 +119,36 @@ foreach my $p (sort keys %wordpat ) {
 close(STR);
 close(WRD);
 
+
+# finally, look for word and variant(s) that differ only by AX0/IH0
+open (AHIH, ">", "out.ahih") or die "can't open for output!\n";
+foreach my $w (sort keys %compare ) {
+    my $count = scalar @{$compare{$w}};
+    if ( $count == 1 ) { next; }  # no variants
+
+    my $headlen = scalar @{$compare{$w}[0]};
+#    print "$w - $headlen -- @{$compare{$w}[0]} --- $count: ";
+    for (my $i=1; $i<$count; $i++) {
+#	print " $i";
+	my $varlen = scalar @{$compare{$w}[$i]};
+	if ( $varlen != $headlen ) { next; }  # not the same length; skip
+
+	#  AX0/IH0 alternation?
+#	print " $headlen <> $varlen ";
+	for (my $j=0; $j<$headlen; $j++) {
+	    if ( @{$compare{$w}[$i]}[$j] eq @{$compare{$w}[0]}[$j] ) { next; }
+	    if ( ( (@{$compare{$w}[0]}[$j] eq 'AH0') or
+		   (@{$compare{$w}[0]}[$j] eq 'IH0') )
+		 and
+		 ( (@{$compare{$w}[$i]}[$j] eq 'AH0') or
+		   (@{$compare{$w}[$i]}[$j] eq 'IH0') )
+		) {
+		print AHIH "$w($i)  \n";
+	    }
+	}
+#	print "\n";
+    }
+}
+close(AHIH);
 
 #
