@@ -7,10 +7,12 @@ Use these scripts for checking and compiling the dictionary.
 The process is the following:
 
 1) make changes to the dictionary
- - it's assumed that the changes are manual
- - check your work by doing a svn diff with the previous version
+ - it's assumed that your changes are manual
 
-2) run scripts/test_cmudict.pl
+1a) As a first pass, check your work by doing a svn diff with the previous version
+ - be sure you still agree with your changes
+
+2) When ready, run scripts/test_cmudict.pl
  EG: ./scripts/test_cmudict.pl -p cmudict.0.7a.symbols cmudict.0.7a
  - this checks for collation order, legal entry format and phonetic symbols
  - if necessary fix problems then repeat this step until no errors

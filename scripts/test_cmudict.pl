@@ -149,21 +149,29 @@ while (<DICT>) {
 	$ph = $stress = $tail = '';
 	($ph,$stress,$tail) = ($s =~ /([A-Z]+)([012]*)(.*)$/);
 	$|=1;
-	# print join( '|', ($s =~ /([A-Z]+)([012]*)(.*)$/)),"\n";
+	#print join( '|', ($s =~ /([A-Z]+)([012]*)(.*)$/)),"\n";
+	
 	$legalV =  defined $phone{$ph} && $class{$ph} eq 'vowel' && $stress ne '' && $tail eq '';
 	if ( not defined $phone{$ph} ) { push @errs, $s; }
 	elsif ( $legalV ) { $phone{$s}++; }  # doesn't do anything here, yet
 	else { $phone{$s}++; }  # could be a bare vowel...
 
-	if ( $tail ne '' ) { push @errs, $s; }
-	elsif ( (defined $class{$ph}) and ($class{$ph} eq 'vowel') and ($stress eq '') ){
-	    print "WARN: $word has a bare phone: $ph\n"; $problems++;
+	if ( $tail ne '' ) { push @errs, $s; }  # junk past the pron
+	elsif ( (defined $class{$ph}) and
+		($class{$ph} eq 'vowel') and ($stress eq '') ){
+	    print "ERROR: $word has a bare phone: $ph\n"; $problems++;
+	}
+	elsif  ( (defined $class{$ph}) and ($class{$ph} eq 'vowel') and
+		 (not (($stress =~ /[012]/) and (length($stress) eq 1)))
+	    ) {
+	    print "ERROR: $word has bad stress mark: '"."$ph $stress"."'\n"; $problems++;
 	}
 	elsif ( (defined $class{$ph}) and ($class{$ph} ne 'vowel') and ($stress ne '') ){
 	    push @errs, $s; }
     }
-    if (scalar @errs ne 0) { print "ERROR: $word has unknown phone(s): '".
-			   join(' ',@errs)."'\n"; $problems++; }
+    if (scalar @errs ne 0) {
+	print "ERROR: $word has unknown phone(s): '".join(' ',@errs)."'\n"; $problems++;
+    }
 
 
     # word order

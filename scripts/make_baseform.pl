@@ -117,7 +117,8 @@ sub get_dict {
     # presume that ";;; #" will be collected and emitted at the top
     if ($_ =~ /^;;; \#/) { push @$header, $_; next; }  # save header info
     elsif ( $_ =~ /^;;;/ ) { next; }  # ignore plain comments
-    elsif ( $_ =~ /^\s*$/ ) { next; }  # ignore blank lines
+    elsif ( $_ =~ /^##/ ) { next; }   # ignore plain comments (old version)
+    elsif ( $_ =~ /^\s*$/ ) { next; } # ignore blank lines
 
     # extract the word,pron pair and prepare for processing
     ($word,$pron) = /(.+?)\s+(.+?)$/;

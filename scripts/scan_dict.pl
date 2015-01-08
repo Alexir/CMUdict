@@ -30,9 +30,11 @@ while (<PH>) {
 close(PH);
 
 open(DICT,$dictfile) ||die("$dictfile not found!\n");
+print STDERR "scanning $dictfile for patterns... ";
 
 
 ###  go through dict, do tests  ####################################
+print STDERR " read";
 %dict = (); my $last = ""; my ($lead, $trail); my $word_cnt = 0;
 while (<DICT>) {
     # chomp;  #    s/^\s*(.+?)\s*$/$1/;
@@ -105,6 +107,7 @@ foreach my $p (sort keys %pattern ) {
     }
     print STR "\n";
 }
+print STDERR " pattrn";
 foreach my $p (sort keys %wordpat ) {
     if ( length $p < 8 ) {$pad = "\t\t";} else {$pad = "\t";}
     print WRD "$wordpat{$p}\t$p$pad";
@@ -122,6 +125,8 @@ close(WRD);
 
 # finally, look for word and variant(s) that differ only by AX0/IH0
 open (AHIH, ">", "out.ahih") or die "can't open for output!\n";
+print STDERR " ahih";
+
 foreach my $w (sort keys %compare ) {
     my $count = scalar @{$compare{$w}};
     if ( $count == 1 ) { next; }  # no variants
@@ -142,7 +147,8 @@ foreach my $w (sort keys %compare ) {
 		 and
 		 ( (@{$compare{$w}[$i]}[$j] eq 'AH0') or
 		   (@{$compare{$w}[$i]}[$j] eq 'IH0') )
-		) {
+		)
+	    {
 		print AHIH "$w($i)  \n";
 	    }
 	}
@@ -150,5 +156,6 @@ foreach my $w (sort keys %compare ) {
     }
 }
 close(AHIH);
+print STDERR " done\n";
 
 #

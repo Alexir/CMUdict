@@ -3,10 +3,13 @@
 # [20100118] (air)
 # [20141225] (air) some house keeping
 
-
+if [ "$#" -eq 0 ] ; then echo "usage: CompileDictionary <dictname>"; exit 1; fi
 DIR=sphinxdict
 DICT_BASE=cmudict
-DICTIONARY=${DICT_BASE}-0.7b  # note that this hard-coded; update as versions creep up.
+
+DICTIONARY=$1  # note that this hard-coded; update as versions creep up.
+if [ ! -e $DICTIONARY ] ; then echo "can't find $DICTIONARY"; exit 1; fi
+
 echo "Compiling $DICTIONARY"; echo ""
 
 # make_baseforms.pl removes stress marks and eliminates resulting duplicates
