@@ -20,9 +20,9 @@ IH  > 	BELIEVERS B IH L IY V ER Z
 
 
 Here are some more (some of these I might have said before):
-NOTICED "N OW T IH S T", 	ref = "N OW T AH S T"
-OPPOSITE "AA P AH S AH T", 	ref = "AA P AH Z AH T | AA P Z AH T"
-ENGAGED "IH NG G EY JH D", 	ref = "EH N G EY JH D"
+ v NOTICED "N OW T IH S T", 	ref = "N OW T AH S T"
+ v OPPOSITE "AA P AH S AH T", 	ref = "AA P AH Z AH T | AA P Z AH T"
+ v ENGAGED "IH NG G EY JH D", 	ref = "EH N G EY JH D"
 
 EXTREME "IH K S T R IY M", 	ref = "EH K S T R IY M"
 POYSER "P OY Z ER", 	ref = "P OY S ER"
@@ -33,6 +33,6 @@ EMILY "EH M AH L IY", 	ref = "EH M IH L IY"
 DROUET "D R UW EY", 	ref = "D R UW T"
 THEY'LL "DH EH L", 	ref = "DH EY L"
 
-NOTICED "N OW T IH S T", 	ref = "N OW T AH S T"
+ v NOTICED "N OW T IH S T", 	ref = "N OW T AH S T"
 OPPOSITE "AA P AH S AH T", 	ref = "AA P AH Z AH T | AA P Z AH T"
-ENGAGED "IH NG G EY JH D", 	ref = "EH N G EY JH D"
+ v ENGAGED "IH NG G EY JH D", 	ref = "EH N G EY JH D"
