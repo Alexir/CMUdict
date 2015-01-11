@@ -1,9 +1,48 @@
-#!/usr/bin/perl -w
+#!perl -w
+
+# ====================================================================
+# Copyright (C) 1999-2008 Carnegie Mellon University and Alexander
+# Rudnicky. All rights reserved.
 #
-# Check for various patterns in the dict
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in
+#    the documentation and/or other materials provided with the
+#    distribution.
+#
+# This work was supported in part by funding from the Defense Advanced
+# Research Projects Agency, the Office of Naval Research and the National
+# Science Foundation of the United States of America, and by member
+# companies of the Carnegie Mellon Sphinx Speech Consortium. We acknowledge
+# the contributions of many volunteers to the expansion and improvement of
+# this dictionary.
+#
+# THIS SOFTWARE IS PROVIDED BY CARNEGIE MELLON UNIVERSITY ``AS IS'' AND
+# ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL CARNEGIE MELLON UNIVERSITY
+# NOR ITS EMPLOYEES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# ====================================================================
+#
+# Check for various patterns in the dict.
+# Tbis is primarily of use for maintenance and quality control
+#
 # [20141226] (air) Created.
 #
-#
+
 use strict;
 use Getopt::Long;
 $|=0;
@@ -19,7 +58,7 @@ if ( not defined $phonefile or not defined $dictfile ) {
 }
 
 
-# get the legal symbol set (and class label)
+# get the legal symbol set (and class labels)
 open(PH,$phonefile) || die("can't open $phonefile!\n");
 while (<PH>) {
     s/[\r\n]*$//;
@@ -32,7 +71,6 @@ close(PH);
 open(DICT,$dictfile) ||die("$dictfile not found!\n");
 print STDERR "scanning $dictfile for patterns... ";
 
-
 ###  go through dict, do tests  ####################################
 print STDERR " read";
 %dict = (); my $last = ""; my ($lead, $trail); my $word_cnt = 0;
@@ -44,15 +82,20 @@ while (<DICT>) {
     if ( $line  =~ /^\s*$/ ) { next; }  # empty lines allowed
 
     # get the head term and the pronunciation, store
-    # need to have the phones in an array, maybe letters too
     ($word,$pron) = split (/\s+/,$line,2);
 
+    # get the phones into an array, letters too
+    # compute phone/ortho length; to spot odd ones.
     my @letter = split '', $word;
-    $dict{$word}{'LETTER'} = @letter;
+    @{$dict{$word}{'LETTER'}} = @letter;
+    my $letr = $word;  # exclude extra characters (which inflate letter count)
+    $letr =~ s/[\'\.\d()\-\_]//g;
     my @phone = split /\s/, $pron;
-    $dict{$word}{'PHONE'}  = @phone;
+    @{$dict{$word}{'PHONE'}}  = @phone;
+    $dict{$word}{'RATIO'}  = scalar @phone / length $letr;
 
     # save the pron for each variant for later comparisons
+    # yes,it's redundant with the above, but it was added later
     my ($root,$var);
     if ( $word =~ /^(\w+)\((\d)\)$/ ) {
 	$root = $1; $var = $2;
@@ -61,6 +104,8 @@ while (<DICT>) {
     }
     @{$compare{$root}[$var]} = @phone;
 
+    # map pronunciation into an abstracted stress pattern
+    # vowels only, then with '.'s for non-vowels
     my @stress = ();
     my @pattrn = ();
     foreach my $ph ( @phone ) {
@@ -77,7 +122,7 @@ while (<DICT>) {
 close(DICT);
 
 
-# make the abstracted patterns
+# organize the abstracted patterns; add example words
 my %pattern = ();
 my %patreg =  ();
 my %wordpat = ();
@@ -93,7 +138,7 @@ foreach my $p (sort keys %dict ) {
 }
 
 
-# output stress and patterns and their counts, plus examples
+# output stress and patterns and their counts, plus the examples
 open(STR,">","out.stress") or die "can't open for output!\n";
 open(WRD,">","out.pattrn") or die "can't open for output!\n";
 my $pad = '';
@@ -123,7 +168,16 @@ close(STR);
 close(WRD);
 
 
-# finally, look for word and variant(s) that differ only by AX0/IH0
+# output odd length entries
+my $RATIO = 1.2;
+open(RATIO,">","out.ratio") or die "can't open  for output!\n";
+print STDERR " ratio";
+foreach my $w (sort keys %dict) {
+    if ( $dict{$w}{'RATIO'} < $RATIO ) { next; }
+    printf RATIO "%4.2f\t%s  ",$dict{$w}{'RATIO'},$w ;
+    print RATIO join(' ',@{$dict{$w}{'PHONE'}}),"\n";
+}
+# find word and variant(s) that differ only by AX0/IH0
 open (AHIH, ">", "out.ahih") or die "can't open for output!\n";
 print STDERR " ahih";
 
@@ -132,7 +186,7 @@ foreach my $w (sort keys %compare ) {
     if ( $count == 1 ) { next; }  # no variants
 
     my $headlen = scalar @{$compare{$w}[0]};
-#    print "$w - $headlen -- @{$compare{$w}[0]} --- $count: ";
+#    print "\n$w - $headlen -- @{$compare{$w}[0]} --- $count: ";
     for (my $i=1; $i<$count; $i++) {
 #	print " $i";
 	my $varlen = scalar @{$compare{$w}[$i]};
@@ -156,6 +210,7 @@ foreach my $w (sort keys %compare ) {
     }
 }
 close(AHIH);
-print STDERR " done\n";
 
+
+print STDERR " done\n";
 #

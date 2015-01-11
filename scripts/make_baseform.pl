@@ -1,6 +1,5 @@
 #!perl -w
 
-#
 # ====================================================================
 # Copyright (C) 1999-2008 Carnegie Mellon University and Alexander
 # Rudnicky. All rights reserved.

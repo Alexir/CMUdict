@@ -1,0 +1,31 @@
+cmudict upgrade
+---------------
+[201412] (air)
+
+scripts
+-------
+
+
+general
+-------
+[20150103] 
+- added duplicate test to test_cmudict.pl
+
+- The version control situation is not completely in-hand: discovered
+  an earlier version of the update that's not in tune with the current
+  branch. Need to fix.
+
+-- pull out acronyms for purposes of g2p training
+ - script a branching to filter out / re-introduce acronyms
+
+-- work on AH0/IH0 problem
+ - collapse all variants of this type
+
+[20150109]
+- various cleanups; mostly stress but also other items
+- g2p improves by ~0.1; at least it's in the right direction...
+
+[20150110]
+- finished builing an 'acronym' set, of ~470 entries
+- wrote script to filter acronyms from dict, makes "clean" training set
+- set up training with this set; expect better model (?)

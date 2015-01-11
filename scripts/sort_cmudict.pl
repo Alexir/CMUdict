@@ -1,6 +1,5 @@
 #!perl -w
 
-#
 # ====================================================================
 # Copyright (C) 1999-2008 Carnegie Mellon University and Alexander
 # Rudnicky. All rights reserved.
@@ -45,6 +44,8 @@
 
 use strict;
 
+my $BASE = 0;  # indexing scheme for variants
+
 if ( scalar @ARGV ne 2 ) { die "usage: sort_cmudict <input> <output>\n"; }
 
 open(IN, $ARGV[0]) || die "can't open $ARGV[0] for reading!\n";
@@ -64,9 +65,9 @@ foreach my $h (sort keys %header) { print OUT "$header{$h}"; }
 # print out each entry
 my $DELIMITER = '  ';  
 foreach my $w (sort keys %dict) {
-  my $var=1;  # number variants from 2 (this is different from original)
+  my $var=$BASE;  # number variants from 2 (this is different from original)
   foreach my $p ( @{$dict{$w}{VARIANT}} ) {
-      if ($var eq 1) {
+      if ($var eq $BASE) {
 	  print  OUT "$w$DELIMITER$p\n";
       }  else {
 	  print  OUT "$w($var)$DELIMITER$p\n";
