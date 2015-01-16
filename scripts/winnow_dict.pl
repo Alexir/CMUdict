@@ -53,7 +53,7 @@ GetOptions("acron=s" => \$acronfile,
 if ( not defined $trainfile or
      not defined $dictfile or
      not defined $acronfile ) {
-    die("usage: test_cmudict -a <acronfile> -d <dictfile> -t <trainfile>\n");
+    die("usage: winnow_dict -a <acronfile> -d <dictfile> -t <trainfile>\n");
 }
 
 open(DICT,$dictfile) ||die("$dictfile not found!\n");

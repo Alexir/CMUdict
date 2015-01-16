@@ -106,7 +106,10 @@ while (<DICT>) {
     # examine the head term and the pronunciation
     ($word,$pron) = split (/\s+/,$line,2);
     $dict{$word}++;
-    if ( $word =~ /[a-z]/ ) { $haslowercase++; }
+    if ( $word =~ /[a-z]/ ) {
+	$haslowercase++;
+	if ( $haslowercase le 5 ) { print "WARN: $word has lower-case\n"; }
+    }
 
     # check tabbing (2 spaces)
     my @line = split (/  /,$line);
@@ -146,12 +149,16 @@ while (<DICT>) {
     my @errs = ();
     my ($ph,$stress,$tail,$legalV);
     foreach my $s (@sym) {
+	if ( $s eq '' ) {
+	    print "ERROR: $word has a null phone! (extra space?)\n";
+	    next;
+	}
 	$ph = $stress = $tail = '';
 	($ph,$stress,$tail) = ($s =~ /([A-Z]+)([012]*)(.*)$/);
 	$|=1;
 	#print join( '|', ($s =~ /([A-Z]+)([012]*)(.*)$/)),"\n";
 	
-	$legalV =  defined $phone{$ph} && $class{$ph} eq 'vowel' && $stress ne '' && $tail eq '';
+	$legalV =  defined $phone{$ph} && ($class{$ph} eq 'vowel') && ($stress ne '') && ($tail eq '');
 	if ( not defined $phone{$ph} ) { push @errs, $s; }
 	elsif ( $legalV ) { $phone{$s}++; }  # doesn't do anything here, yet
 	else { $phone{$s}++; }  # could be a bare vowel...
@@ -195,8 +202,8 @@ foreach my $x (keys %dict) {
 }
 
 print "\nprocessed $word_cnt words\n";
-if ( $haslowercase ne 0 ) { print "$haslowercase entries have lower case"; }
-if ($problems eq 0) { print "no problems encountered!\n"; }
+if ( $haslowercase ne 0 ) { print "$haslowercase entries have lower case\n"; }
+if ($problems eq 0) { print "no errors encountered!\n"; }
 
 # print out the phone counts
 print "symbol occurence statistics:\n";
