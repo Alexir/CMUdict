@@ -26,3 +26,7 @@ Bring the sequitur g2p testing stage back. Generalize testing setup for better t
 - doing this on an i7 octo is too slow
     - revise on aspen/birch to be able to run ||lel experiments
 
+[201501] (air)
+weed out acronyms to allow for a cleaner dictionary (for g2p training).
+Keep in acronym-0.7b, but the full dict is the distribution.
+

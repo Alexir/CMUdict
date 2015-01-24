@@ -1,12 +1,13 @@
+;;; ACRONYMS (that can be filtered out for purposes of g2p training)
 ;;; words in the corresponding dict that are abbrevations or acronyms
 ;;; and should not be used for g2p training (since there's no obvious
-;;; letter to word matches).
+;;; letter-to-sound match).
 ;;;
 ;;; # $HeadURL: $
-;;; # $Date:: 2014-02-17 13:05:41 -0500 (Mon, 17 Feb 2014)      $:
-;;; # $Id:: cmudict.0.7 12245 2014-02-17 18:05:41Z air          $:
-;;; # $Rev:: 12245                                              $: expect gaps
-;;; # $Author:: air                                             $:
+;;; # $Date:: 2015-01-24 18:22:02 -0500 (Sat, 24 Jan 2015)    $:
+;;; # $Id:: acronym-0.7b 12811 2015-01-24 23:22:02Z air       $:
+;;; # $Rev:: 12811                                            $: expect gaps
+;;; # $Author:: air                                           $:
 ;;;
 
 
@@ -193,6 +194,8 @@ FBI  EH1 F B IY1 AY1
 FBI'S  EH1 F B IY1 AY1 Z
 FEB  F EH1 B Y AH0 W EH2 R IY0
 FM  EH1 F EH1 M
+FNMA  EH2 F EH2 N EH2 M EY1
+FNMA(1)  F AE2 N IY2 M EY1
 FOIA  F OW1 Y AH0
 FOIA(1)  EH1 F OW1 AY1 EY1
 FOP(1)  EH1 F OW1 P IY1
@@ -207,7 +210,7 @@ GA(2)  JH AO1 R JH AH0
 GEAC(1)  JH IY1 IY1 EY1 S IY1
 GED(1)  JH IY1 IY1 D IY1
 GENEGO(2)  JH IY1 IY1 EH1 N IY1 JH IY1 OW1
-GMBH(1)  JH IY1 EH1 M B IY1 EY1 CH
+GMBH  G IY1 EH2 M B IY2 HH AA2
 GNC  JH IY1 EH1 N S IY1
 GOVPX  G AH1 V P IY2 EH1 K S
 GOVS(1)  G AA1 V ER0 N ER0 Z
@@ -396,9 +399,11 @@ S'S  EH1 S IH0 Z
 S.  EH1 S
 S.'S  EH1 S IH0 Z
 SAI(1)  EH1 S EY1 AY1
-SBF  EH1 S B IY1 EH1 F
+SBA  EH2 S B IY2 EY1
+SBF  EH2 S B IY2 EH1 F
 SCI(1)  EH1 S S IY1 AY1
 SCS  EH2 S S IY2 EH1 S
+SCSI  S K UH1 Z IY2
 SDN  EH1 S D IY1 EH1 N
 SEP(1)  EH1 S IY1 P IY1
 SFFED(2)  EH1 S EH1 F EH1 F IY1 D IY1
@@ -439,6 +444,7 @@ U.S  Y UW1 Z
 UFO  Y UW2 EH2 F OW1
 UN(1)  Y UW1 EH1 N
 UNIX  Y UW1 N IH0 K S
+URL  Y UW2 AA2 R EH1 L
 US(1)  Y UW1 EH1 S
 USA  Y UW1 EH1 S EY1
 USS  Y UW1 EH1 S EH1 S
@@ -491,6 +497,7 @@ Y'ALL  Y AO2 L
 Y'S  W AY1 Z
 Y.  W AY1
 Y.'S  W AY1 Z
+Y2K  W AY2 T UW2 K EY1
 Z  Z IY1
 Z'S  Z IY1 Z
 Z.  Z IY1

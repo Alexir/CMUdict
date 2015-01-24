@@ -9,8 +9,8 @@ The process is the following:
 1) make changes to the dictionary
  - it's assumed that your changes are manual
 
-1a) As a first pass, check your work by doing a svn diff with the previous version
- - be sure you still agree with your changes
+1a) As a first pass, check your work by doing a svn diff with the
+previous version - be sure you still agree with your changes
 
 2) When ready, run scripts/test_cmudict.pl
  EG: ./scripts/test_cmudict.pl -p cmudict.0.7a.symbols cmudict.0.7a
@@ -22,7 +22,7 @@ The process is the following:
  [checks for consistency using test_dict.pl]
  - produces two *_SPHINX_40 files; one generic the other major-versioned
  
- 4) use svn to update cmudict; be sure to add a proper logging message
+4) use svn to update cmudict; be sure to add a proper logging message
  
  That's it!
  
