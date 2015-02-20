@@ -4,9 +4,9 @@
 ;;; letter-to-sound match).
 ;;;
 ;;; # $HeadURL: $
-;;; # $Date:: 2015-01-24 18:22:02 -0500 (Sat, 24 Jan 2015)    $:
-;;; # $Id:: acronym-0.7b 12811 2015-01-24 23:22:02Z air       $:
-;;; # $Rev:: 12811                                            $: expect gaps
+;;; # $Date:: 2015-02-20 17:05:54 -0500 (Fri, 20 Feb 2015)    $:
+;;; # $Id:: acronym-0.7b 12860 2015-02-20 22:05:54Z air       $:
+;;; # $Rev:: 12860                                            $: expect gaps
 ;;; # $Author:: air                                           $:
 ;;;
 
