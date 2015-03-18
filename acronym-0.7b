@@ -4,9 +4,9 @@
 ;;; letter-to-sound match).
 ;;;
 ;;; # $HeadURL: $
-;;; # $Date:: 2015-02-25 11:33:28 -0500 (Wed, 25 Feb 2015)    $:
-;;; # $Id:: acronym-0.7b 12869 2015-02-25 16:33:28Z air       $:
-;;; # $Rev:: 12869                                            $: expect gaps
+;;; # $Date:: 2015-03-15 17:30:19 -0400 (Sun, 15 Mar 2015)    $:
+;;; # $Id:: acronym-0.7b 12877 2015-03-15 21:30:19Z air       $:
+;;; # $Rev:: 12877                                            $: expect gaps
 ;;; # $Author:: air                                           $:
 ;;;
 
@@ -203,6 +203,9 @@ E.'S  IY1 Z
 E.S  IY1 Z
 EAP  IY1 EY1 P IY1
 EDU(1)  IY1 D IY1 Y UW1
+EE  IY2 IY1
+EEG  IY2 IY2 G IY1
+EEO  IY1 IY1 OW1
 EK(1)  IY1 K EY1
 EKK  IY1 K EY1 K EY1
 EMDR  IY1 EH1 M D IY1 AA1 R
