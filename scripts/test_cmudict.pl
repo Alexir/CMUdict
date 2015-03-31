@@ -127,6 +127,7 @@ while (<DICT>) {
     if ( ($tok =~ /\(/) or ($tok =~ /\)/) ) {
 	if ( not ($tok =~ /^.+?\(\d\)$/) ) {
 	    print "ERROR: malformed variant tag in '$word'\n"; $problems++;
+	    next;  # skip along to the next word
 	}
     }
 
