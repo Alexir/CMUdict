@@ -1,9 +1,9 @@
 ;;; # CMUdict  --  Major Version: 0.07
 ;;; 
 ;;; # $HeadURL: https://svn.code.sf.net/p/cmusphinx/code/branches/cmudict/cmudict-0.7b $
-;;; # $Date:: 2015-03-29 10:32:57 -0400 (Sun, 29 Mar 2015)      $:
-;;; # $Id:: cmudict-0.7b 12904 2015-03-29 14:32:57Z air         $:
-;;; # $Rev:: 12904                                              $: 
+;;; # $Date:: 2015-07-15 12:34:30 -0400 (Wed, 15 Jul 2015)      $:
+;;; # $Id:: cmudict-0.7b 13083 2015-07-15 16:34:30Z air         $:
+;;; # $Rev:: 13083                                              $: 
 ;;; # $Author:: air                                             $:
 ;;;
 ;;; #
@@ -53848,7 +53848,7 @@ HEIDER  HH AY1 D ER0
 HEIDI  HH AY1 D IY0
 HEIDI'S  HH AY1 D IY0 S
 HEIDINGER  HH AY1 D IH0 NG ER0
-HEIDIWEAR  HH AY1 D IY0 W EH0 R
+HEIDIWEAR  HH AY1 D IY0 W EH2 R
 HEIDLER  HH AY1 D AH0 L ER0
 HEIDLER(1)  HH AY1 D L ER0
 HEIDORN  HH AY1 D ER0 N
@@ -77650,7 +77650,7 @@ MENSTRUAL  M EH1 N S T R UW0 AH0 L
 MENSTRUAL(1)  M EH1 N S T R AH0 L
 MENSTRUATE  M EH1 N S T R UW0 EY2 T
 MENSTRUATION  M EH2 N S T R UW0 EY1 SH AH0 N
-MENSWEAR  M EH1 N Z W EY2 R
+MENSWEAR  M EH1 N Z W EH2 R
 MENTAL  M EH1 N T AH0 L
 MENTALITY  M EH0 N T AE1 L AH0 T IY0
 MENTALITY(1)  M EH0 N T AE1 L IH0 T IY0
@@ -117957,11 +117957,11 @@ SWAZILAND  S W AA1 Z IH0 L AH0 N D
 SWEANEY  S W IY1 N IY0
 SWEANY  S W IY1 N IY0
 SWEAR  S W EH1 R
-SWEARENGEN  S W IH1 R IH0 NG AH0 N
-SWEARENGIN  S W EH1 R IH0 NG AH0 N
+SWEARENGEN  S W EH1 R IH0 N JH AH0 N
+SWEARENGIN  S W EH1 R IH0 N JH AH0 N
 SWEARING  S W EH1 R IH0 NG
-SWEARINGEN  S W EH1 R IH0 NG AH0 N
-SWEARINGIN  S W EH1 R IH0 NG AH0 N
+SWEARINGEN  S W EH1 R IH0 N JH AH0 N
+SWEARINGIN  S W EH1 R IH0 N JH AH0 N
 SWEARS  S W EH1 R Z
 SWEAT  S W EH1 T
 SWEATED  S W EH1 T IH0 D
