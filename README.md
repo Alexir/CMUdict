@@ -7,7 +7,7 @@ Various maintenance and development scripts for managing the cmudict
 Note: This is a working version of cmudict, maintained by Alexander
 Rudnicky (`air@cm.cmu.edu`) for mainly his own use..  It is not
 necessarly up-to-date; other versions exist and might be more up-to-date.  This version is periodically updated by Alex Rudnicky, at which
-time other from other versions may be incorporated. Yes, I
+time changes from other versions may be incorporated. Yes, I
 know, this should really be done in a branch. But it's not. 
 
 
