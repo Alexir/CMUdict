@@ -9,8 +9,8 @@ Rudnicky (`air@cs.cmu.edu`) for mainly his own use.
 It is not
 necessarly up-to-date; other versions exist and might be more up-to-date.  
 This version is periodically updated by Alex Rudnicky, at which
-time changes from other versions may be incorporated. Yes, I
-know, this should really be done in a branch. But it's not. 
+time changes from other versions may be incorporated. 
+Yes, I know, this should really be done in a branch. But it's not. 
 
 
 In particular, take a look at  `https://github.com/cmusphinx/cmudict`.
